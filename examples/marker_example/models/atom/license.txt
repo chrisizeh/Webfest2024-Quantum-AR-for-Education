@@ -1,0 +1,11 @@
+Model Information:
+* title:	Atom
+* source:	https://sketchfab.com/3d-models/atom-1ba1cf4d360844f0a8ca231eae30ac1f
+* author:	holger.traeger (https://sketchfab.com/holger.traeger)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Atom" (https://sketchfab.com/3d-models/atom-1ba1cf4d360844f0a8ca231eae30ac1f) by holger.traeger (https://sketchfab.com/holger.traeger) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
