@@ -1,0 +1,74 @@
+<!doctype HTML>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+        <style>
+            h2 {
+                position: absolute;
+                right: 50px;
+                top: 0;
+            }
+        </style>
+    </head>
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    
+    <body style='margin : 0px; overflow: hidden;'>
+        <script>
+            AFRAME.registerComponent('markerhandler', {
+              init: function () {
+                var startMarkerEl = document.getElementById("startMarker");
+                startMarkerEl.addEventListener('markerFound', (ev) => {
+                    console.log("Marker 'Start' found")
+                    prob = Math.random();
+
+                    var catEl = document.getElementById("cat");
+                    catEl.setAttribute('prob', prob);
+                });
+
+                var catMarkerEl = document.getElementById("catMarker");
+                catMarkerEl.addEventListener('markerFound', (ev) => {
+                    console.log("Marker 'Cat' found")
+
+                    var catEl = document.getElementById("cat");
+                    score = catEl.getAttribute('score');
+
+                    if(prob < 0.5) {
+                        color = "#FFC300"
+                    } else {
+                        color = "#DAF7A6"
+                    };
+                    catEl.setAttribute('color', color);
+
+                    if(prob) {
+                        console.log(score);
+                        window.location = '/scene2/' + str(round(prob, 2));
+                    }
+                    
+                });
+            }});
+          </script>
+
+        <div class="background">
+            <h2>{{score}}</h2>
+        </div>
+       
+
+
+        <a-scene markerhandler embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 4x4;'>
+
+        <a-marker id="startMarker" type='barcode' value='0'>
+            <a-sphere id="sphere" color="#C70039"></a-sphere>
+        </a-marker>
+
+        <a-marker id="catMarker" type='barcode' value='1'>
+            <a-sphere id="cat"></a-sphere>
+        </a-marker>
+
+        <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker> -->
+        <a-entity camera></a-entity>
+        </a-scene>
+    </body>
+</html>
