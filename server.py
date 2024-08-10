@@ -31,16 +31,16 @@ def scene2():
 
 
 @app.route("/scene2/<prob>")
-def scene2Score(prob):
+def scene2Prob(prob):
     if 'score' not in session:
         return redirect("/")
 
-    if(prob < 0.5):
+    if(int(prob) < 0.5):
         session["score"] += 10
     else:
         session["score"] -= 3
 
-    return render_template('cat.html', score=session["score"], prob=prob)
+    return render_template('cat.html', score=session["score"], prob=int(prob))
 
 
 @app.route("/end")

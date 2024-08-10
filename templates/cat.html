@@ -17,9 +17,13 @@
     
     <body style='margin : 0px; overflow: hidden;'>
         <script>
+            console.log("starting");
+            prob = parseInt("{{ prob }}");
+
             AFRAME.registerComponent('markerhandler', {
               init: function () {
                 var startMarkerEl = document.getElementById("startMarker");
+                
                 startMarkerEl.addEventListener('markerFound', (ev) => {
                     console.log("Marker 'Start' found")
                     prob = Math.random();
@@ -33,18 +37,21 @@
                     console.log("Marker 'Cat' found")
 
                     var catEl = document.getElementById("cat");
-                    score = catEl.getAttribute('score');
+                    probCat = catEl.getAttribute('prob');
 
-                    if(prob < 0.5) {
+                    if(probCat < 0.5) {
                         color = "#FFC300"
+                        prob = 0
                     } else {
                         color = "#DAF7A6"
+                        prob = 1
                     };
                     catEl.setAttribute('color', color);
 
-                    if(prob) {
-                        console.log(score);
-                        window.location = '/scene2/' + str(round(prob, 2));
+                    if(probCat) {
+                        url = '/scene2/' + prob;
+                        console.log(url);
+                        window.location = url;
                     }
                     
                 });
@@ -54,20 +61,22 @@
         <div class="background">
             <h2>{{score}}</h2>
         </div>
-       
 
+        <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 4x4;'>
 
-        <a-scene markerhandler embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 4x4;'>
+            <!-- <a-assets>
+                <a-asset-item id="cat" src="cat/scene.gltf"></a-asset-item>
+            </a-assets> -->
 
-        <a-marker id="startMarker" type='barcode' value='0'>
+        <a-marker markerhandler id="startMarker" type='barcode' value='0'>
             <a-sphere id="sphere" color="#C70039"></a-sphere>
         </a-marker>
 
-        <a-marker id="catMarker" type='barcode' value='1'>
+        <a-marker markerhandler id="catMarker" type='barcode' value='1'>
             <a-sphere id="cat"></a-sphere>
+            <!-- <a-entity gltf-model="#cat"></a-entity> -->
         </a-marker>
 
-        <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker> -->
         <a-entity camera></a-entity>
         </a-scene>
     </body>
