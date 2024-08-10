@@ -15,6 +15,9 @@ def general():
 def scene1():
     return render_template('scene1.html')
 
+@app.route("/cups")
+def scene1():
+    return render_template('cup-game-working.html')
 
 @app.route("/scene1/<score>")
 def scene1Score(score):
