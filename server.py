@@ -1,6 +1,6 @@
 from flask import Flask, session, render_template, redirect
 
-app = Flask(__name__)
+app = Flask(__name__,  static_folder='static')
 
 # Set the secret key to some random bytes. Keep this really secret!
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'

@@ -42,13 +42,15 @@
                     probCat = catEl.getAttribute('prob');
 
                     if(probCat < 0.5) {
-                        color = "#FFC300"
+                        // color = "#FFC300"
+                        catEl.setAttribute('src', '#normal');
                         prob = 0
                     } else {
-                        color = "#DAF7A6"
+                        catEl.setAttribute('src', '#metal');
+                        // color = "#DAF7A6"
                         prob = 1
                     };
-                    catEl.setAttribute('color', color);
+                    
 
                     if(probCat) {
                         url = '/scene2/' + prob;
@@ -66,17 +68,19 @@
 
         <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 4x4;'>
 
-            <!-- <a-assets>
-                <a-asset-item id="cat" src="cat/scene.gltf"></a-asset-item>
-            </a-assets> -->
+            <a-assets>
+                <img id="normal" src="/static/cat/textures/lambert2SG_normal.png">
+                <img id="metal" src="/static/cat/textures/lambert2SG_metallicRoughness.png">
+                <a-asset-item id="cat" src="/static/cat/scene.gltf"></a-asset-item>
+            </a-assets>
 
         <a-marker markerhandler id="startMarker" type='barcode' value='0'>
             <a-sphere id="sphere" color="#C70039"></a-sphere>
         </a-marker>
 
         <a-marker markerhandler id="catMarker" type='barcode' value='1'>
-            <a-sphere id="cat"></a-sphere>
-            <!-- <a-entity gltf-model="#cat"></a-entity> -->
+            <!-- <a-sphere id="cat" src="#normal"></a-sphere> -->
+            <a-entity gltf-model="#cat"  ></a-entity>
         </a-marker>
 
         <a-entity camera></a-entity>
