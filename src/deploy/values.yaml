@@ -1,0 +1,12 @@
+app:
+  name: webfest2024-quantum-ar
+image:
+  repository: docker.io
+  user: proman3419
+  name: webfest2024-quantum-ar
+  version: 0.0.1
+webserver:
+  port: 32000
+  nodeport: 32000
+node:
+  hostname: kube-worker-0

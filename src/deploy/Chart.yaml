@@ -1,0 +1,5 @@
+apiVersion: v2
+name: webfest2024-quantum-ar
+description: Webfest2024 Quantum AR Helm chart
+type: application
+version: 0.0.1
