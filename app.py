@@ -13,11 +13,11 @@ def general():
 
 @app.route("/scene1")
 def scene1():
-    return render_template('scene1.html', score=session["score"])
+    return render_template('scene1.html')
 
 
 @app.route("/scene1/<score>")
-def addScore(score):
+def scene1Score(score):
     if 'score' not in session:
         return redirect("/")
 
@@ -25,9 +25,27 @@ def addScore(score):
     return redirect("/end")
 
 
+@app.route("/scene2")
+def scene2():
+    return render_template('cat.html', score=session["score"])
+
+
+@app.route("/scene2/<prob>")
+def scene2Score(prob):
+    if 'score' not in session:
+        return redirect("/")
+
+    if(prob < 0.5):
+        session["score"] += 10
+    else:
+        session["score"] -= 3
+
+    return render_template('cat.html', score=session["score"], prob=prob)
+
+
 @app.route("/end")
 def end():
     if 'score' not in session:
         return redirect("/")
-        
+
     return render_template('end.html', score=session["score"])
