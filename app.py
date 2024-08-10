@@ -1,4 +1,4 @@
-from flask import Flask, session, render_template
+from flask import Flask, session, render_template, redirect
 
 app = Flask(__name__)
 
@@ -13,24 +13,21 @@ def general():
 
 @app.route("/scene1")
 def scene1():
-    if 'score' not in session:
-        session["score"] = 0
-
-    session["score"] += 5
-
     return render_template('scene1.html', score=session["score"])
 
 
 @app.route("/scene1/<score>")
 def addScore(score):
     if 'score' not in session:
-        session["score"] = 0
+        return redirect("/")
 
     session["score"] += int(score)
-
-    return render_template('scene1.html', score=session["score"])
+    return redirect("/end")
 
 
 @app.route("/end")
 def end():
+    if 'score' not in session:
+        return redirect("/")
+        
     return render_template('end.html', score=session["score"])
